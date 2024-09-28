@@ -1,0 +1,41 @@
+# Banco-de-dados
+CREATE TABLE Clientes (
+id int constraint cliente primary key,nome varchar(50), email varchar(50)
+);
+insert into clientes (id, nome, email) values (1,'Gustavo', 'gustavao@gmail.com');
+insert into clientes (id, nome, email) values (2,'Guilherme', 'Guizin@gmail.com');
+insert into clientes (id, nome, email) values (3,'Marco', 'marcao@gmail.com');
+select * from clientes
+
+alter table clientes add column telefone varchar(24);
+select * from clientes
+update clientes set email = 'gustavao123@gmail.com', telefone = '(45) 8765-432' where id = 1;
+select * from clientes
+delete from clientes where id = 3;
+select * from clientes
+drop table pedidos;
+create table pedidos (id int constraint pc_pedidos primary key,
+clientes_id int constraint fk_pedido_cliente references clientes(id),
+produto varchar (300), quantidade int);
+
+insert into pedidos (id, clientes_id, produto, quantidade) values(1, 1, 'camiseta', 2), (2, 2, 'calça', 1),
+(3, 1, 'tenis', 1), (4, 1, 'boné', 3);
+select * from pedidos;
+drop table pedidos;
+create table pedidos (id int constraint pc_pedidos primary key,
+clientes_id int constraint fk_pedido_cliente references clientes(id),
+produto varchar (300), quantidade int);
+
+insert into pedidos (id, clientes_id, produto, quantidade) values(1, 1, 'camiseta', 2), (2, 2, 'calça', 1),
+(3, 1, 'tenis', 1), (4, 1, 'boné', 3);
+select nome, produto, quantidade from clientes right join pedidos on clientes.id =
+pedidos.clientes_id;
+drop table fornecedores;
+create table fornecedores (id int constraint pc_fornecedores primary key, nome varchar(88), email
+varchar(24), telefone varchar(22));
+
+insert into fornecedores(id, nome, email) values
+(1, 'fornecedor A', 'fornecedorres@gmail.com'),
+(2, 'fornecedor B', 'fornecedores@gmail.com'),
+(3, 'fornecedor S', 'fornecedor@gmail.com');
+select * from clientes union select * from fornecedores;
